@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = MicroscopeTracer::VERSION
   spec.authors       = ["Pete Hodgson"]
   spec.email         = ["rubygems@thepete.net"]
-  spec.summary       = %q{Logs Microscope-compliant trace entries and helps pass Microscope- headers through to HTTP clients.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Logs Microscope-compliant trace entries and wrangles Microscope- HTTP headers.}
+  #spec.description   = %q{TODO: Write a longer description. Optional.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -20,4 +20,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
+
+  spec.add_dependency "request_store"
 end
