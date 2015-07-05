@@ -7,9 +7,9 @@ require 'microscope_tracer/trace_logger'
 module MicroscopeTracer
 
 class RackMiddleware
-  def initialize(app,logger = Logger.new($stdout))
+  def initialize(app,io = $stdout)
     @app = app
-    @trace_logger = TraceLogger.new(logger)
+    @trace_logger = TraceLogger.new(io)
   end
 
   def call(env)

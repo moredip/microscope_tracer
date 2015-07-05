@@ -1,7 +1,7 @@
 module MicroscopeTracer
 class TraceLogger
-  def initialize(logger)
-    @logger = logger
+  def initialize(io)
+    @io = io
   end
 
   def log_server_start(span)
@@ -25,7 +25,8 @@ class TraceLogger
   def log(type,span,extras={})
     fields = {type:type,traceId:span.trace_id,spanId:span.span_id,pspanId:span.parent_span_id}.merge(extras)
     line = fields.map{ |k,v| if v then "#{k}=\"#{v}\"" else nil end }.compact.join(" ")
-    @logger.info(line)
+
+    @io.puts(line)
   end
 end
 end

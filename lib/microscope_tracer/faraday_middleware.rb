@@ -4,8 +4,8 @@ require 'microscope_tracer/trace_logger'
 
 module MicroscopeTracer
 class FaradayMiddleware < Faraday::Middleware
-  def initialize(app,logger = Logger.new($stdout))
-    @trace_logger = TraceLogger.new(logger)
+  def initialize(app,io=$stdout)
+    @trace_logger = TraceLogger.new(io)
     super(app)
   end
 
