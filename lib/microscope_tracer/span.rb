@@ -17,7 +17,8 @@ class Span
     RequestStore.store[:microscope_span] = self
   end
 
-  def initialize(trace_id,parent_span_id,span_id = false)
+  def initialize(trace_id,parent_span_id,span_id)
+    trace_id ||= Span.generate_unique_id
     span_id ||= Span.generate_unique_id
     @trace_id, @parent_span_id, @span_id = trace_id, parent_span_id, span_id
   end
