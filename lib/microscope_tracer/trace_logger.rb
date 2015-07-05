@@ -1,7 +1,11 @@
 module MicroscopeTracer
 class TraceLogger
-  def initialize(io)
-    @io = io
+  def initialize(service_name)
+    @service_name = service_name
+
+    # hardcoded for now
+    @log_prefix = "MICROSCOPE: "
+    @io = $stdout
   end
 
   def log_server_start(span)
@@ -23,10 +27,10 @@ class TraceLogger
   end
 
   def log(type,span,extras={})
-    fields = {type:type,traceId:span.trace_id,spanId:span.span_id,pspanId:span.parent_span_id}.merge(extras)
+    fields = {service:@service_name,type:type,traceId:span.trace_id,spanId:span.span_id,pspanId:span.parent_span_id}.merge(extras)
     line = fields.map{ |k,v| if v then "#{k}=\"#{v}\"" else nil end }.compact.join(" ")
 
-    @io.puts(line)
+    @io.puts(@log_prefix + line)
   end
 end
 end
