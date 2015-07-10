@@ -27,7 +27,7 @@ class TraceLogger
   end
 
   def log(type,span,extras={})
-    fields = {service:@service_name,type:type,traceId:span.trace_id,spanId:span.span_id,pspanId:span.parent_span_id}.merge(extras)
+    fields = {service:@service_name,type:type,traceId:span.trace_id,spanId:span.span_id,pSpanId:span.parent_span_id}.merge(extras)
     line = fields.map{ |k,v| if v then "#{k}=\"#{v}\"" else nil end }.compact.join(" ")
 
     @io.puts(@log_prefix + line)
