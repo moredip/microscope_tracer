@@ -17,12 +17,12 @@ class FaradayMiddleware < Faraday::Middleware
 
     started_at = Time.now
 
-    @trace_logger.log_client_start(span)
+    @trace_logger.log_client_start(span,child_span_id)
 
 
     @app.call(env).on_complete do |response_env|
       duration = Time.now - started_at
-      @trace_logger.log_client_end(span,duration) 
+      @trace_logger.log_client_end(span,child_span_id,duration) 
     end
   end
 end

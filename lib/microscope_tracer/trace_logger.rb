@@ -17,13 +17,13 @@ class TraceLogger
     log(:server_end,span,{elapsedMillis:millis})
   end
 
-  def log_client_start(span)
-    log(:client_start,span)
+  def log_client_start(span,child_span_id)
+    log(:client_start,span,{childSpanId:child_span_id})
   end
 
-  def log_client_end(span,duration_in_seconds)
+  def log_client_end(span,child_span_id,duration_in_seconds)
     millis = duration_in_seconds * 1000
-    log(:client_end,span,{elapsedMillis:millis})
+    log(:client_end,span,{childSpanId:child_span_id,elapsedMillis:millis})
   end
 
   def log(type,span,extras={})
